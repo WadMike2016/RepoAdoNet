@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppToGitHub.Models;
 
 namespace WebAppToGitHub.Controllers
 {
@@ -10,7 +11,9 @@ namespace WebAppToGitHub.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HoraireModel h = new HoraireModel();
+            List<HoraireModel> lm = h.GetAll();
+            return View(lm);
         }
 
         public ActionResult About()
