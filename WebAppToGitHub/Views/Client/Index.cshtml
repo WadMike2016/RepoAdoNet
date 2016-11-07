@@ -1,0 +1,172 @@
+﻿@model WebAppToGitHub.Models.ClientModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Connectez-vous</h3>
+                        @{
+
+                            if (ViewBag.ErrorLogin != null)
+                            {
+                                @:<br /><div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                        }
+                            if (ViewBag.SuccessLogin != null)
+                            {
+                                @:<br /><div class="alert alert-success">Welcome</div>
+                        }
+                        }
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="POST" action="~/Client/LogMe">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user" style="width: auto"></i>
+                                    </span>
+                                    <input id="Login" type="text" class="form-control" name="Login" placeholder="Login" required="" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock" style="width: auto"></i>
+                                    </span>
+                                    <input id="Password" type="password" class="form-control" name="Password" placeholder="Password" required="" />
+                                </div>
+                            </div>
+                            <input type="submit" value="Connexion" class="btn btn-info btn-block">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 badge badge-primary text-success vertical-center ">OU</div>
+        <div class="col-lg-5">
+            <div class="container">
+                <div class="row centered-form">
+                    <div class="">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Inscrivez-vous</h3>
+                                @{
+
+                                    if (ViewBag.ErrorMsg != null)
+                                                {
+                                            @:<br /><div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                        }
+                                                if (ViewBag.Success != null)
+                                                {
+                                            @:<br /><div class="alert alert-success">Client enregistré</div>
+                        }
+                                }
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" method="POST">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="NomClient" id="NomClient" class="form-control input-sm" required placeholder="Votre Nom">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="PrenomClient" id="PrenomClient" class="form-control input-sm" required placeholder="Votre prénom">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="date" name="DateNaissance" id="DateNaissance" class="form-control input-sm" required placeholder="Date de naissance">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="tel" name="TelClient" id="TelClient" class="form-control input-sm" placeholder="Votre téléphone">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="RueClient" id="RueClient" class="form-control input-sm" required placeholder="Rue - N°">
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="CodePostalClient" id="CodePostalClient" class="form-control input-sm" required placeholder="Code postal">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="VilleClient" id="VilleClient" class="form-control input-sm" required placeholder="Votre ville">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <img src="~/images/male.ico" width="50" />
+                                                </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <img src="~/images/female.ico" width="50" />
+                                                </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <img src="~/images/unidentified.ico" width="50" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <input type="radio" name="Sexe" value="@bool.TrueString" />
+                                                </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <input type="radio" name="Sexe" value="@bool.FalseString" />
+                                                </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center">
+                                                    <input type="radio" name="Sexe" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="MailClient" id="MailClient" class="form-control input-sm" placeholder="Votre adresse E-mail">
+                                    </div>
+                                    <div class="form-group">
+                                        <hr />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="Login" id="Login" class="form-control input-sm" placeholder="Votre Login">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="Register" class="btn btn-info btn-block">
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -27,13 +27,14 @@
 
 </head>
 <body>
+   @{ var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();}
     <!--start-home-->
 
     <div class="main-header" id="house">
         <div class="header-strip">
             <div class="container">
-                <p class="location"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:info@example.com">info@example.com</a></p>
-                <p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 655 8858 54892</p>
+                <p class="location"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <a href="mailto:michael.person@cognitic.be">michael.person@cognitic.be</a></p>
+                <p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> + 32 498 071448</p>
                 <div class="social-icons">
                     <ul>
                         <li><a href="#"><i class="facebook"> </i></a></li>
@@ -80,20 +81,24 @@
                             <span class="icon-bar"></span>
                         </button>
                         <div class="logo">
-                            <h1><a class="navbar-brand" href="index.html"><span>M</span>edicinal  <img src="images/logo.png" alt=" " /></a></h1>
+                            <h1><a class="navbar-brand" href="index.html"><span>M</span>edicinal  <img src="~/images/logo.png" alt=" " /></a></h1>
                         </div>
                     </div>
-
+                    
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                         <div class="top-menu">
                             <nav class="menu menu--francisco">
                                 <ul class="nav navbar-nav menu__list">
-                                    <li class="menu__item menu__item--current"><a href="index.html" class="menu__link"><span class="menu__helper">Home</span></a></li>
-                                    <li class="menu__item"><a href="about.html" class="menu__link"><span class="menu__helper">About Us</span></a></li>
-                                    <li class="menu__item"><a href="typography.html" class="menu__link"><span class="menu__helper">Short Codes</span></a></li>
-                                    <li class="menu__item"><a href="gallery.html" class="menu__link"><span class="menu__helper">Departments</span></a></li>
-                                    <li class="menu__item"><a href="contact.html" class="menu__link"><span class="menu__helper">Contact Us</span></a></li>
+                                    <li class="menu__item @{ if (controllerName=="Home")
+                                                              {
+                                                                  @: menu__item--current
+                                                                                                                                                }  } "><a href="/Home/Index" class="menu__link"><span class="menu__helper">Home</span></a></li>
+                                    <li class="menu__item @{ if (controllerName=="Client")
+                                                              {
+                                                                  @: menu__item--current
+                                                                                                        }  } "><a href="/Client/Index" class="menu__link"><span class="menu__helper"><span class="glyphicon glyphicon-log-in"> espace client</span></span></a></li>
+                         
                                 </ul>
                             </nav>
                         </div>
@@ -194,25 +199,9 @@
             <p>© 2016 Medicinal. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
         </div>
     </div>
-    <!--start-smooth-scrolling-->
-    <script type="text/javascript">
-									$(document).ready(function() {
-										/*
-										var defaults = {
-								  			containerID: 'toTop', // fading element id
-											containerHoverID: 'toTopHover', // fading element hover id
-											scrollSpeed: 1200,
-											easingType: 'linear'
-								 		};
-										*/
-
-										$().UItoTop({ easingType: 'easeOutQuart' });
-
-									});
-    </script>
-    <!--end-smooth-scrolling-->
+    
     <a href="#house" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
     <script src="~/Scripts/bootstrap.js"></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

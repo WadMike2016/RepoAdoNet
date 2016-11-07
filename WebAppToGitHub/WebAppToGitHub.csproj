@@ -111,11 +111,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\HoraireModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +152,7 @@
     <Content Include="images\closew.gif" />
     <Content Include="images\co.png" />
     <Content Include="images\down.png" />
+    <Content Include="images\female.ico" />
     <Content Include="images\g1.jpg" />
     <Content Include="images\g2.jpg" />
     <Content Include="images\g3.jpg" />
@@ -162,7 +167,10 @@
     <Content Include="images\img-sp.png" />
     <Content Include="images\img-sprite.png" />
     <Content Include="images\left-quotes.png" />
-    <Content Include="images\logo.png" />
+    <Content Include="images\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\male.ico" />
     <Content Include="images\middle.jpg" />
     <Content Include="images\move-top.png" />
     <Content Include="images\n1.jpg" />
@@ -182,6 +190,7 @@
     <Content Include="images\t2.jpg" />
     <Content Include="images\t3.jpg" />
     <Content Include="images\tw.png" />
+    <Content Include="images\unidentified.ico" />
     <Content Include="images\wallhaven-10742-thumb.jpg" />
     <Content Include="images\wallhaven-10742.jpg" />
     <Content Include="images\wallhaven-12018-thumbnail.jpg" />
@@ -194,6 +203,7 @@
     <Content Include="images\wallhaven-3178.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Zorro.html" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -221,9 +231,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\TestAjax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
