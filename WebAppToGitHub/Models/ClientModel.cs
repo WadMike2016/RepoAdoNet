@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace WebAppToGitHub.Models
@@ -120,12 +121,13 @@ namespace WebAppToGitHub.Models
             set { _sexe = value; }
         }
         #endregion
-
+        
+        /// <summary>
+        /// Saves this instance on database
+        /// </summary>
+        /// <returns>true if save is ok</returns>
         public bool Save()
         {
-
-            List<HoraireModel> laliste = new List<HoraireModel>();
-
             //1 - Connexion
             SqlConnection oConn = new SqlConnection();
             //1.1 - Chemin vers le serveur ==> ConnectionString
@@ -198,7 +200,15 @@ namespace WebAppToGitHub.Models
                pPassword.Value = this.Password;
                SqlParameter pSexe = new SqlParameter();
                pSexe.ParameterName = "@Sexe";
-               pSexe.Value = this.Sexe;
+                if(this.Sexe.HasValue)
+                {
+                    pSexe.Value = this.Sexe.Value;
+                }
+                else
+                {
+                    pSexe.Value = DBNull.Value;
+                }
+               
 
 
                oCmd.Parameters.Add(pNomClient);
@@ -223,6 +233,63 @@ namespace WebAppToGitHub.Models
                 return false;
             }
             return true;
+        }
+        
+        /// <summary>
+        /// Get Client from DB which has the parameter pseudo
+        /// </summary>
+        /// <returns>A <seealso cref="ClientModel"/> if pseudo exist, Null if not</returns>
+        public static ClientModel getOneFromPseudo(string Pseudo)
+        { //1 - Connexion
+            SqlConnection oConn = new SqlConnection();
+            //1.1 - Chemin vers le serveur ==> ConnectionString
+            oConn.ConnectionString = @"Data Source=MIKEW8\TFTIC2012;Initial Catalog=MedicoDb;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+            //1.2 - Ouvrir la connexion
+            try
+            {
+                oConn.Open();
+
+                //2 - Commande
+                SqlCommand oCmd =
+                    new SqlCommand(@"Select * from Client where Login=@pseudo"
+                                   , oConn);
+
+
+                //3 - Ajout des paramètres
+
+               SqlParameter pPseudo = new SqlParameter();
+               pPseudo.ParameterName = "@pseudo";
+               pPseudo.Value = Pseudo;
+               oCmd.Parameters.Add(pPseudo);
+               ClientModel Client = null;
+               SqlDataReader oDr = oCmd.ExecuteReader();
+                if(oDr.HasRows)
+                {
+                    oDr.Read();
+                    Client = InstanceFromOdr(oDr);
+                    
+                }
+                oDr.Close();
+                //4 - Fermer la connexion
+                oConn.Close();
+
+                return Client;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+         
+        }
+
+        private static ClientModel InstanceFromOdr(SqlDataReader oDr)
+        {
+            ClientModel Client = new ClientModel();
+            foreach (PropertyInfo item in Client.GetType().GetProperties())
+            {
+                item.SetValue(Client, oDr[item.Name]);
+            }
+            return Client;
         }
     }
 }

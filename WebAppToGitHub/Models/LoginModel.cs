@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using WebAppToGitHub.Infra;
 
 namespace WebAppToGitHub.Models
 {
@@ -41,7 +42,8 @@ namespace WebAppToGitHub.Models
                 //3.1 - lire toute les lignes
                 if(oDr.Read())
                 {
-                    HttpContext.Current.Session["User"] = this.Login;
+                   // HttpContext.Current.Session["User"] = "Belzebuth";
+                    MesSessions.Patient = this;
                     isverif = true;
                 }
                 //3.2 - Fermer le reader

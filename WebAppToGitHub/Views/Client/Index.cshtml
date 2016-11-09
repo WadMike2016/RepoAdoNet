@@ -30,7 +30,8 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user" style="width: auto"></i>
                                     </span>
-                                    <input id="Login" type="text" class="form-control" name="Login" placeholder="Login" required="" />
+                                    <input id="Login" type="text"  class="form-control" name="Login" placeholder="Login" required="" />
+                                    
                                 </div>
                             </div>
                             <div class="form-group">
@@ -60,7 +61,7 @@
 
                                     if (ViewBag.ErrorMsg != null)
                                                 {
-                                            @:<br /><div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                                            @:<br /><div class="alert alert-danger">Erreur lors de l'enregistrement</div>
                         }
                                                 if (ViewBag.Success != null)
                                                 {
@@ -143,7 +144,8 @@
                                         <hr />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="Login" id="Login" class="form-control input-sm" placeholder="Votre Login">
+                                        <input type="text" name="Login" onblur="AjaxVerifPseudo(this)" id="Login" class="form-control input-sm" placeholder="Votre Login">
+                                        <div class="alert" id="infoPseudo"></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -169,4 +171,36 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+    function AjaxVerifPseudo(p)
+    {
+        $.ajax(
+            {
+                url: 'http://localhost:53291/Ajax/IsValidPseudo/', // La ressource ciblée
+            type : 'GET', // Le type de la requête HTTP.
+            data : 'Pseudo=' + p.value,
+            })
+           .done(
+               function (data) {
+                   if (data == "False")
+                   {
+                       $("#infoPseudo").addClass("alert-danger");
+                       $("#infoPseudo").html = "Login non disponible";
+                   }
+                   else
+                   {
+                       $("#infoPseudo").addClass("alert-success");
+                       $("#infoPseudo").html = "Login disponible";
+                   }
+
+               }
+              );
+    }
+    </script>
+}
+
+
+
 

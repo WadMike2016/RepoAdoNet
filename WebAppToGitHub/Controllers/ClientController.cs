@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppToGitHub.Infra;
 using WebAppToGitHub.Models;
 
 namespace WebAppToGitHub.Controllers
@@ -10,10 +11,7 @@ namespace WebAppToGitHub.Controllers
     public class ClientController : Controller
     {
 
-        public ActionResult TestAjax()
-        {
-            return View();
-        }
+       
 
         // GET: Client
         public ActionResult Index()
@@ -39,7 +37,7 @@ namespace WebAppToGitHub.Controllers
             }
             else
             {
-                              
+
 
                 ViewBag.ErrorMsg = "Vous ne respectez pas les contraintes";
                 return View();
@@ -51,7 +49,10 @@ namespace WebAppToGitHub.Controllers
         {
             if (lm.Verif())
             {
-                ViewBag.SuccessLogin = "Welcome";
+                string login = MesSessions.Patient.Login;
+               
+                ViewBag.SuccessLogin = "Welcome " + login;
+
                 return View("Index");
             }
             else
