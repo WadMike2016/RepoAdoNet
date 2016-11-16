@@ -11,6 +11,15 @@ namespace WebAppToGitHub
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/AjaxScripts").Include(
+                "~/js/AjaxFunction.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/theme").Include(
+                "~/scripts/move-top.js",
+                "~/scripts/easing.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -25,7 +34,9 @@ namespace WebAppToGitHub
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/style.css",
+                      "~/Content/Site.css",
+                      "~/Content/slider.css"));
         }
     }
 }
