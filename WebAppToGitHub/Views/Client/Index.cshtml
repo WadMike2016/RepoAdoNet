@@ -173,32 +173,7 @@
 </div>
 
 @section Scripts {
-    <script>
-    function AjaxVerifPseudo(p)
-    {
-        $.ajax(
-            {
-                url: 'http://localhost:53291/Ajax/IsValidPseudo/', // La ressource ciblée
-            type : 'GET', // Le type de la requête HTTP.
-            data : 'Pseudo=' + p.value,
-            })
-           .done(
-               function (data) {
-                   if (data == "False")
-                   {
-                       $("#infoPseudo").addClass("alert-danger");
-                       $("#infoPseudo").html = "Login non disponible";
-                   }
-                   else
-                   {
-                       $("#infoPseudo").addClass("alert-success");
-                       $("#infoPseudo").html = "Login disponible";
-                   }
-
-               }
-              );
-    }
-    </script>
+  
 }
 
 

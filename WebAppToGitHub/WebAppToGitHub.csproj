@@ -203,6 +203,7 @@
     <Content Include="images\wallhaven-27263.jpg" />
     <Content Include="images\wallhaven-3178-thumb.jpg" />
     <Content Include="images\wallhaven-3178.jpg" />
+    <Content Include="js\AjaxFunction.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Zorro.html" />

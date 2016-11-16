@@ -9,6 +9,29 @@ namespace WebAppToGitHub.Controllers
 {
     public class AjaxController : Controller
     {
+        /// <summary>
+        /// Vérifie le pseudo
+        /// </summary>
+        /// <param name="LeLoginATester">le login a tester.</param>
+        /// <returns>return true si le pseudo est libre, false dans le cas contraire</returns>
+        public bool CheckPseudo(string LeLoginATester)
+        {
+           return !ClientModel.verifPseudo(LeLoginATester);
+            // Equivalent à
+            //if(ClientModel.verifPseudo(LeLoginATester)==true)
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+
+
+        }
+
+
+
         // GET: Ajax
         public string Index()
         {
@@ -20,10 +43,10 @@ namespace WebAppToGitHub.Controllers
             return "wallhaven-16270.jpg";
         }
 
-        public bool IsValidPseudo(string Pseudo)
-        {
-            return ClientModel.getOneFromPseudo(Pseudo) != null;
-        }
+        //public bool IsValidPseudo(string Pseudo)
+        //{
+        //    return ClientModel.getOneFromPseudo(Pseudo) != null;
+        //}
 
     }
 }

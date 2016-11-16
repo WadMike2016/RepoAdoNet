@@ -234,7 +234,57 @@ namespace WebAppToGitHub.Models
             }
             return true;
         }
-        
+
+        /// <summary>
+        /// Verifs the pseudo.
+        /// </summary>
+        /// <param name="unLogin">The login.</param>
+        /// <returns>return true if login exist</returns>
+        public static bool verifPseudo(string unLogin)
+        {
+            SqlConnection oConn = new SqlConnection();
+            oConn.ConnectionString = @"Data Source=MIKEW8\TFTIC2012;Initial Catalog=MedicoDb;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+
+            try
+            {
+                oConn.Open();
+                SqlCommand oCmd = new SqlCommand();
+                oCmd.CommandText = "select * from Client where Login=@login";
+
+                SqlParameter sp = new SqlParameter("login", unLogin);
+                oCmd.Parameters.Add(sp);
+                oCmd.Connection = oConn;
+
+       
+
+                SqlDataReader reader = oCmd.ExecuteReader();
+                //if(reader.HasRows)
+                //{
+                //    reader.Close();
+                //    oConn.Close();
+                //    return true;
+                //}
+                //else
+                //{
+                //    reader.Close();
+                //    oConn.Close();
+                //    return false;
+                //}
+                bool ret = reader.HasRows;
+                reader.Close();
+                oConn.Close();
+                return ret;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        }
+
+
+
         /// <summary>
         /// Get Client from DB which has the parameter pseudo
         /// </summary>
